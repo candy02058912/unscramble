@@ -22,6 +22,6 @@ Print messages:
 texts_first = texts[0]
 calls_last = calls[-1]
 
-print('First record of texts, {0} texts {1} at time {2}'.format(*texts_first))
-print('Last record of calls, {0} calls {1} at time {2}, lasting {3} seconds'.format(
+print("First record of texts, {0} texts {1} at time {2}".format(*texts_first))
+print("Last record of calls, {0} calls {1} at time {2}, lasting {3} seconds".format(
     *calls_last))
