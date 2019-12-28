@@ -1,3 +1,6 @@
+import re
+from decimal import Decimal
+
 """
 Read file into texts and calls.
 It's ok if you don't understand how to read files.
@@ -43,3 +46,30 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+codes = set()
+bangalore_calls_num = 0
+bangalore_ans = 0
+for record in calls:
+    if record[0].find("(080)") == 0:
+        # For Part B: Add to total calls made in bangalore
+        bangalore_calls_num += 1
+
+        code = re.search(r'\((\d+)\)', record[1])
+        if code:
+            # For Part B: Add to answering calls in bangalore
+            if code.group(1) == "080":
+                bangalore_ans += 1
+
+            codes.add(code.group(1))
+        elif record[1].find("140") == 0:
+            codes.add(record[1])
+
+bangalore_percentage = round(
+    Decimal(bangalore_ans / bangalore_calls_num * 100), 2)
+
+print("The numbers called by people in Bangalore have codes:")
+print(*sorted(list(codes)), sep="\n")
+
+print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".
+      format(bangalore_percentage))
