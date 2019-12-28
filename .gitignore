@@ -1,0 +1,6 @@
+.python-version
+.DS_Store
+.vscode
+
+calls.csv
+texts.csv
