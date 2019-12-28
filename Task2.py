@@ -25,23 +25,23 @@ current_max_duration = 0
 current_max_number = ''
 
 for calling, answering, _, duration in calls:
-    try:
+    if phone_dict.get(calling):
         phone_dict[calling] += int(duration)
-    except KeyError:
+    else:
         phone_dict[calling] = int(duration)
-    finally:
-        if phone_dict[calling] > current_max_duration:
-            current_max_duration = phone_dict[calling]
-            current_max_number = calling
 
-    try:
+    if phone_dict[calling] > current_max_duration:
+        current_max_duration = phone_dict[calling]
+        current_max_number = calling
+
+    if phone_dict.get(answering):
         phone_dict[answering] += int(duration)
-    except KeyError:
+    else:
         phone_dict[answering] = int(duration)
-    finally:
-        if phone_dict[answering] > current_max_duration:
-            current_max_duration = phone_dict[answering]
-            current_max_number = answering
+
+    if phone_dict[answering] > current_max_duration:
+        current_max_duration = phone_dict[answering]
+        current_max_number = answering
 
 print("{0} spent the longest time, {1} seconds, on the phone during September 2016.".format(
     current_max_number, current_max_duration))
