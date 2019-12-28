@@ -24,15 +24,15 @@ phone_dict = {}
 current_max_duration = 0
 current_max_number = ''
 
-for incoming, answering, _, duration in calls:
+for calling, answering, _, duration in calls:
     try:
-        phone_dict[incoming] += int(duration)
+        phone_dict[calling] += int(duration)
     except KeyError:
-        phone_dict[incoming] = int(duration)
+        phone_dict[calling] = int(duration)
     finally:
-        if phone_dict[incoming] > current_max_duration:
-            current_max_duration = phone_dict[incoming]
-            current_max_number = incoming
+        if phone_dict[calling] > current_max_duration:
+            current_max_duration = phone_dict[calling]
+            current_max_number = calling
 
     try:
         phone_dict[answering] += int(duration)
